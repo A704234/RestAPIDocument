@@ -1,0 +1,9 @@
+com\atos\equens\worldline\controller\MessageController.class
+com\atos\equens\worldline\service\ProfileService.class
+com\atos\equens\worldline\MessengerRestSpringApplication.class
+com\atos\equens\worldline\controller\ProfileController.class
+com\atos\equens\worldline\model\Message.class
+com\atos\equens\worldline\model\Profile.class
+com\atos\equens\worldline\DAO\ProfileDAO.class
+com\atos\equens\worldline\DAO\MessageDAO.class
+com\atos\equens\worldline\service\MessageService.class
