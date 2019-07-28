@@ -1,0 +1,771 @@
+%==================Preamble=====================
+\documentclass[12pt,a4paper]{report}
+\usepackage{xcolor}
+\usepackage[margin=1in,left=1.5in,includefoot]{geometry}
+%\usepackage[left=1in,right=1in,top=1in,bottom=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{afterpage}
+\usepackage{float}
+\usepackage[explicit]{titlesec}
+\usepackage{nomencl}
+\usepackage[nottoc]{tocbibind}
+\usepackage[acronym]{glossaries}
+\usepackage{tikz}
+\usetikzlibrary{shapes,shadows,arrows}
+\makenomenclature
+\onehalfspacing
+%--------------------Header and Footer---------------
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+\renewcommand{\contentsname}{Table of Contents}
+\usepackage{fancyhdr}
+\renewcommand{\familydefault}{\rmdefault}
+\pagestyle{fancy}
+\fancyhead[R]{\small \textbf{Smart Parking System Using RFID Technology}}
+
+\fancyhead[L]{}
+\fancyfoot{}
+\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt} 
+\usepackage{color}
+\definecolor{heading}{rgb}{0.54, 0.2, 0.14}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{2.5pt}
+\makeatletter
+\renewcommand{\headrule}{
+	\setlength\@tempdima{\headrulewidth}
+	\textcolor{heading}{\hrule\@height\@tempdima\@width\headwidth}
+	\vskip -2\@tempdima}
+\makeatother
+%\renewcommand{\footrulewidth}{1pt}
+%==================Front Matter=====================
+
+
+\begin{document}
+	\rmfamily
+	\pagenumbering{roman}
+	\begin{center}
+		{\Large \textbf{ Acknowledgements }}\vspace{0.5cm}
+	\end{center}
+\addcontentsline{toc}{chapter}{\numberline{}\textbf{Acknowledgements}}
+We have been bestowed the privilege of expressing our gratitude to everyone who helped us in completing this project work First we would like to thank our guide Mr. Mohan Kumar S, Department of Information Science and Engineering, Ramaiah Institute of Technology Bengaluru, whose guidance was great use to us during the project work .
+
+We would like to express our sincere thanks to Dr. Vijaya Kumar B P, Professor and Head of the Department of Information Science and Engineering, Ramaiah Institute of
+Technology Bengaluru, for providing us an opportunity to vehiclery out this project work.
+
+We  and our acknowledgement incomplete without thanking Dr. N.V.R.Naidu, Principal  Ramaiah Institute of
+Technology Bengaluru, for inspiration and co-operation.
+
+
+Finally we thank one and all who have directly or indirectly assisted using the project. The sense of contentment elation that accompanies the successful completion of our project And its report would be incomplete without mentioning the names of people who helped us in accomplishing this.
+
+Last but not the least we like to thank all the staff  members, teaching and non-teaching Staff  for helping us during the course of the project.
+\\\\\\\vspace{2cm}\\
+MD ABDUL AHAD CHANDA\\ 
+SACHEEN ISHWAR ADAVINAVAR\\ 
+SACHIN POOJERI\\
+SHUBHAM PAWAR \\
+
+\newpage
+\begin{center}
+	{\Large \textbf{Abstract}}\vspace{0.5cm}\\
+\end{center}
+\addcontentsline{toc}{chapter}{\numberline{}\textbf{Abstract}}
+
+
+	
+	There has been a considerable amount of reduction in transaction costs and decrease
+	in stock shortage with the use of Radio Frequency Identification (RFID) technology in
+	automation. Most of the RFID networks include a wide range of automation
+	technologies. Such as RFID readers, RFID writers, RFID barcode scanners, RFID
+	smart sensors and RFID controllers.
+	
+	With the exponential increase in the number of vehicles, population and
+	urbanization day by day, vehicle availability and usage on the road in recent years,
+	finding a space for a parking the car is becoming more and more difficult with
+	resulting in the number of conflicts such as driver frustration, traffic problems, noise
+	and air pollution
+	
+	The system consists of RFID Technology which involves embedding RFID tag in the
+	vehicles and reader in the parking area. Reading capability is provided when it passes
+	through the barricade or in a channel which can read the car details, check-in time, etc.
+	This details will help in identifying how many vehicles have been parked and how many
+	vacant slots are available. The vehicle, when it moves into the parking space, it could
+	able to give the identity or details about the slot to the owner via an Android
+	application, so that conveniently he will be given a path. LDR (Light Dependent
+	Resistor) sensors are used to sense the slot to check whether the slot is free or not.
+	When the car is removed from the slot, check out time will be read and total park fare
+	is calculated and displayed. And in order to bring intelligence into such system, we
+	have deployed a prototype model, for experimentation, by considering a passive
+	RFID tag and reader.
+	
+	Implementation of the prototype system is developed by establishing simple
+	parking place prototype along with four slots, barricade, LDR system, LCD (Liquid
+	Crystal Display) display, RFID tag, and reader. We could able to test the system by
+	using toy vehicle. The system is working effectively with all the information
+	regarding vehicle movement, parking slot utilization, owner convenience and found
+	that this system can work effectively if it is field deployed.
+	\fancypagestyle{plain}{% % <-- this is new
+		\fancyhf{} 
+		\fancyfoot[LE,RO]{\thepage} % same placement as with page style "fancy"
+		\renewcommand{\headrulewidth}{0pt}}
+	\thispagestyle{fancy}
+	\tableofcontents
+
+	\clearpage
+	
+	\newpage
+	\thispagestyle{fancy}
+	\listoffigures
+	
+	\newpage
+	\thispagestyle{empty}
+
+	\begin{figure}[H]
+			\begin{center}
+				\includegraphics[scale=0.73]{wp}
+			\end{center}
+			\caption{Prototype Model}		
+	\end{figure}
+\cleardoublepage
+\newpage
+\thispagestyle{fancy}
+\pagenumbering{arabic}
+
+
+\titleformat{\chapter}[display]{\bfseries\centering \fancyfoot[R]{\thepage} \vspace{7cm}}{\huge Chapter \thechapter}{1em}{\Huge #1}
+\thispagestyle{fancy}
+\chapter{INTRODUCTION}
+	\newpage
+	\vspace{0.5cm}
+Nowadays in many public places such as malls, multiplex systems, hospitals, offices, market areas there is a crucial problem of vehicle  parking. The vehicle-parking area has many lanes/slots for vehicle parking. So to park a vehicle one has to look for all the lanes. 
+Moreover, this involves a lot of manual labor and investment. So, there  is a need to develop an automated parking system that indicates
+directly the availability of vacant parking slots in any lane right at the entrance. It involves a system including infrared transmitter-receiver pair in each lane and a display outside the vehicle parking gate. So the person desirous to park his vehicle is well informed about the status of
+availability of parking slot. 
+\par Conventional parking systems do not have any intelligent monitoring system and the parking lots are monitored by security guards. Significant of time is wasted in searching vacant slot for parking and  many a times it creates jams. Conditions become worse when there  are multiple parking lanes and each lane with multiple parking slots.  Use of parking management system would reduce the human efforts  and time with additional comfort. In the proposed system, the display  unit displays a visual representation of the parking and it shows the  empty and occupied slots which help the user to decide where to park their vehicle. The system  would  not  only  save  time  but  the software  and  hardware  would  also  manage  the  check-in  and 
+check-outs of the vehicles under the control of RFID readers/tags with additional features of automatic billing, Entry exit data logging.
+
+\par The users go through a onetime registration  process where there  are  asked to fill in their personal  details and an account is  created  for  them,  this  account  has  information  about  them and also  has  money  in  it  which  they  can  recharge  at  kiosks present in the  vicinity. In this system, the  users are  guided to the   vacant  slot   for  parking  using  Video  Displays at the entrance  of the parking floor, these displays show a visual representation of the  parking lot with empty and occupied slots which are green and red respectively.The user is provided with a tag which he/she receives on registration, this tag is linked with his prepaid account and includes his personal information, and this tag uses Radio Frequency  Identification 
+(RFID)  technology  and  is  placed  on  the  top  of  the  user’s 	windshield. The parking charges are automatically deducted from the user’s account  based  on  the  time  spent  inside  the parking area. \newpage
+\section{Motivation}
+The  main   motivation  for   making  Smart Parking System using RFID Technology is because  of  the  huge  amount  of  time  people  have  to  take  in order to park their vehicles in malls, multiplex systems, hospitals, offices  and  super  markets.  In  the  existing system, one  has  to spend ample  time  before  they find out an empty parking spot and also the conventional payment method requires the user to spend  a  lot  of  time  to  complete  their  transaction.  Creating  an automated system which not only helps users to make parking much  more   efficient   and   faster   but   also   automates   the payment  gateway  using  RFID  thus  saving  the  user  a  lot  of 	time.
+\section{Scope of Project}
+Smart Parking System Using RFID Technology is an android application for customers to book parking slot without standing in tiresome queues. Manual process is used to search for the parking slot and then park. The manual process requires man power and more time consuming. The key components of Smart Parking System Using RFID Technology are
+\begin{itemize}
+	\item Registration/Login
+	\item Authentication check
+	\item Parking Slot Booking
+	\item Punching RFID Tag
+	\item Verification and opening Barricade
+	\item Check in 
+	\item Check out
+	\item Online payment module
+\end{itemize}\newpage
+\section{Objectives}
+Now a days  in  many  public  places  such  as  malls,  multiplex 
+systems,  hospitals,  offices,  market  areas  there  is  a  crucial 
+problem   of   vehicle   parking.   The   vehicle parking   area   has   many 
+lanes/slots for vehicle parking. So to park a vehicle one has to look for 
+all the lanes. 
+Moreover,
+this involves a lot of 
+manual labor and 
+investment. 
+So,
+there  is  a  need  to  develop  an  automated 
+parking   system   that   indicates   directly   the   availability   of 
+vacant  parking  slots  in  any  lane  right  at  the  entrance.  It 
+involves a system including infrared transmitter receiver pair 
+in each lane and a display outside the vehicle parking gate. So the 
+person desirous to park his vehicle is well informed about the 
+status of availability of parking slot. 
+\par Conventional  parking  systems  do  not  have  any  intelligent 
+monitoring  system  and  the  parking  lots  are  monitored  by 
+security  guards.  A  lot  of  time  is  wasted  in  searching  vacant 
+slot  for parking and  many a times it creates jams. Conditions 
+become worse when there are multiple parking lanes and each 
+lane  with  multiple parking  slots. Use of smart parking  
+system   would   reduce   the   human   efforts   and   time   with 
+additional  comfort.  In  the  proposed  system,  the  mobile  
+displays  a  visual  representation  of  the  parking  and  it  shows 
+the  empty  and  occupied  slots  which  help  the  user  to  decide 
+where to park their vehicle. The system would not only save time 
+but the software and hardware would also manage the Check-in  and  check-outs  of  the  vehicles  under  the  control  of  RFID 
+readers/tags  with  additional  features  of  automatic  billing, 
+Entry exit data logging.
+\section{Proposed Model}
+In this project, an Smart Parking System with RFID is a
+one which enables the user to find the nearest parking area and gives availability of parking slots in that respective parking area has
+been designed. And it mainly focuses on reducing the time in finding the parking lots as well as avoids traffic at a particular area. A
+webpage is being designed that regulates the number of vehicles to be parked on designated parking area.
+Website associated with the server enables the user to analyze areas where parking is available in the user’s mobile or computer or
+any devices it shows the number of slots free in that area. Additionally, half an hour prior to his arrival, the user can pre-book a slot
+in the area he desires if it is available. It enhances the slots availability to the user so that they can book the slots and park the
+vehicles.
+After reaching the slot every driver owning the vehicle parking card also known as the RFID tag should show it in front of RFID
+reader. This card contains the parking information. The RFID card readers will be fixed at the vehicle parking centers. If a person wants
+to park his vehicle in the parking center, he has to show his parking card before the reader before parking. The reader reads the in time
+of the vehicle and passes the data to the System which in turn sends the data to the web server. When the vehicle exits out from the
+parking center, the driver once again has to show his card so that the reader records the out time now. The time of in and exits
+enhances the card to detect the amount.
+\section{Organization of Report}		
+\begin{itemize}
+	\item Chapter 2
+	
+	In chapter 2, contains brief description of various journal papers that are relevant to project Smart Parking System using RFID Technology.
+	
+	\item Chapter 3
+	
+	In chapter 3, contains information regarding Software requirements specification. This chapter include various diagrams such as components and Softwares used. Brief analysis of each diagram is done, which makes the design more understandable.
+	
+	\item Chapter 4
+	
+	
+In chapter 4, contains information regarding system design and its architecture. This chapter include various diagrams such as use case diagrams, data flow diagrams, class diagrams, sequence diagrams. Brief analysis of each diagram is done, which makes the design more understandable.. It gives detailed view of implementation, flowchart and logic.
+	
+	\item Chapter 5
+	
+	In chapter 5, includes various test cases that are performed to determine whether the project meets requirements.
+	
+	\item Chapter 6
+	
+	Chapter 6 is all about the testing and final result of project. 
+\end{itemize}
+\newpage
+\chapter{LITERATURE REVIEW}
+
+\newpage
+	\begin{itemize}
+	\item[ 1. ] \textbf{Smart Parking Applications Using RFID Technology}\\
+	
+	Zeydin Pala and  Nihat Inanc discussed about Smart Parking Applications Using RFID Technology. Most of the RFID networks include a wide range of automation technologies. These technologies are RFID readers, RFID writers, RFID barcode scanners, RFID smart sensors and RFID controllers. In this study, a solution has been provided for the problems encountered in parking-lot management systems via RFID technology. RFID readers, RFID labels, computers, barriers and software are used as for the main components of the RFID technology. The software has been handled for the management, controlling, transaction reporting and operation tasks for parking lots located on various parts of the city. Check-ins and check-outs of the parking-lots will be under control with RFID readers, labels and barriers. Personnel costs will be reduced considerably using this technology. It will be possible to see unmanned, secure, automized parking-lots functioning with RFID technology in the future. Check-ins and check-outs will be handled in a fast manner without having to stop the vehicles so that traffic jam problem will be avoided during these processes. Drivers will not have to stop at the circulation points and parking tickets will be out of usage during check-ins and check-outs. It will be avoided ticket-jamming problems for the ticket processing machines as well. Vehicle owners will not have to make any payments at each check-out thus a faster traffic flow will be possible. Since there won't be any waiting during check-ins and check-outs the formation of emission gas as a result of such waiting will be avoided. An automized income tracking system, a vehicle tracking system for charging and a central parking-vehicle tracking system have been developed and utilized. Instead of vehicles' parking on streets, a more modern and a fast operating parking-lot system have been developed.
+	
+	\item[ 2. ] \textbf{Smart Parking Guidance, Monitoring and Reservations: A Review}\\
+	
+	Amir O. Kotb , Yao-chun Shen and Yi Huang discussed about Smart Parking Guidance, Monitoring and Reservations.
+	As the urban population is increasing, more and more vehicles are circulating in the city to search for parking spaces which contributes to the global problem of traffic congestion. To alleviate the parking problems, smart parking systems must be implemented. In this paper, the background on parking problems is introduced and relevant algorithms, systems, and techniques behind the smart parking are reviewed and discussed. This paper provides a good insight into the guidance, monitoring and reservations components of the smart vehicle parking and directions to the future development.
+	
+	\item[ 3. ] \textbf{Radio Frequency global positioning system for real-time vehicle parking}\\
+
+Abhishek Singh , Anuj Kumar and Ashok Kumar discussed about Radio Frequency global positioning system for real-time vehicle parking.
+	Due to rise in vehicular traffic, the existing parking systems are inadequate and are unable to handle the parking loads in major urban centers and cities. Therefore, there is a need and continuous demand of computerized, highly precise, and real time parking device for any city. The existing systems have complex process and have drawbacks in terms of vehicle sensor located in parking lots. Hence, to address this gap, the Radio Frequency (RF) global positioning system for real time vehicle parking has been designed in compliance with IEEE 802.15.4 standards as one of the ways to address the vehicular parking problem. The wireless sensor based position detection and display module is implemented successfully. The developed position detection module is capable of the integration to any vehicle. This system implementation is based on Received Signal Strength (RSS) values and the channelization techniques. The mean-mode model is used to enhance the results of received signal strength in position measurement and the channelization is used for vehicle identification. This system is useful for crowded vehicle (vehicle) parking with improving position detection, and direction.
+	
+	
+	\item[ 4. ] \textbf{RFID-based efficient method for parking slot vehicle detection}\\\\
+Petar Šolić  , Ivan Marasović and Maria Laura Stefanizzi discussed about RFID-based efficient method for parking slot vehicle detection.
+	Enabling a sustainable urban mobility is one of primary goals of the so-called Smart Cities vision, and the deployment of smart parking systems represents a key aspect. The proper operation of these systems heavily depends on their ability to automatically detect the presence of vehicles in the parking spaces. To date, this problem is solved by expensive wireless/wired systems. As the vehicle presence is only one bit of information, with importance of knowing the ID of a slot, in this paper we consider the possibility of using Battery Assisted Passive (BAP) tags for those purposes. Specifically, the considered system uses a BAP tag, with the battery replaced by a solar cell. Once the light level is below some thresholds (ensured by vehicle on top of it), the tag stops transmitting the data, and the system recognizes the slot as occupied. The feasibility of the proposed solution is experimentally verified, and first results are reported.
+	\item[ 5. ] \textbf{RFID-based efficient method for parking slot vehicle detection}\\\\
+Ramchandrappa, Sangamesh, Kailas and Sandeep.D.Bawage discussed about RFID-based efficient method for parking slot vehicle detection.
+	There   has   been   a   considerable   amount   of reduction in transaction costs and decrease in stock shortage with 
+	the  use  of  Radio  Frequency  Identification  (RFID)  technology  in 	automation. Most of the RFID  networks include  a 
+	wide range  of automation  technologies.  These  technologies  are  RFID readers, 
+	RFID writers, RFID barcode scanners, and RFID controllers. In this study, a solution has been provided for the problems 
+	encountered in parking-lot management systems via RFID 
+	technology. RFID readers, RFID labels, computers, barriers  and 
+	software  are  used  as  for  the  main  components  of  the
+	RFID technology. The software has  been  handled for the  management, 
+	controlling,  and  operation  tasks  for  parking  lots. 
+	Check-ins  and 
+	check-outs  of  the  parking-lots  will  be  under  control  with  RFID 
+	readers, labels and barriers.
+	
+	
+	\item[ 6. ] \textbf{RFID-based efficient method for parking slot vehicle detection}\\\\
+Anusooya G, Christy Jackson J, Sathyarajasekaran K and Kumar Kannan have discussed about RFID-based efficient method for parking slot vehicle detection.
+	The  main 
+	objective  is  to  avoid  the  cramming  in  the  vehicle 
+	parking area by implementing an efficient vehicle parking system 
+	along with a user friendly
+	application for an ease of use. 
+	Normally at public places such as multiplex theatres, market 
+	areas, hospitals, function halls,  offices  and  shopping  malls, 
+	one  experiences the discomfort  in  looking  out  for  a  vacant 
+	parking  slot,  though  it’s  a  paid  facility  with  an  attendant/security  guard.  The  parking  management  system  is  proposed 
+	to  demonstrate  hazel  free  parking. The  proposed  system  uses 
+	infrared  transmitter-receiver  pairs  that  remotely  communicate 
+	the  status  of  parking  occupancy  to  the  raspberry  pi  and 
+	displays  the  vacant  slots  on  the  display  at  the  entrance  of  the 
+	parking   so   that   the   user   gets   to   know   the   availability/unavailability of parking space prior to his/her entry into the 
+	parking   place.   Implementation   involves   minimal   human 
+	interaction   and   provides   a   seamless   parking   experience 
+	thereby  reducing  a  lot  of  time  wasted  by  the  user  in  parking 
+	his/her vehicle.
+	\item[ 7. ] \textbf{SMART PARKING SYSTEM USING RF ID}\\\\
+		Aditya vikram singh, Abhisekh Bhattacharjee, Mayuri Bhosle and 
+	A.Prabha-kar have discussed about SMART PARKING SYSTEM USING RF ID.The steep increase in the number of vehicles and the additional   problem   of      available   parking   spaces   has   lead 
+	researchers  with  a  complicated  problem  to  deal  with  .  The 
+	concept of smart parking system has been under development for 
+	quite  some  time  and  now  MNC's  and  other  corporations  are 
+	looking to not only deal with the problem of traffic for the benefit 
+	of  their  employees  but  also  the  problem  of  parking  spaces  by 
+	introducing Radio frequency identity based parking systems.
+	
+	\item[ 8. ] \textbf{IoT Based Smart Parking System Using RFID}\\
+
+Prof.S.S.Thorat, Ashwini M, Akanksha Kelshikar, Sneha Londhe and Mamta Choudhary
+have discussed about IoT Based Smart Parking System Using RFID.
+	With the exponential increase  in the number of vehicles and world  population day by day, vehicle availability and us age on the road in recent years, finding a space for
+	parking the bike is becoming more and more difficult with resulting in the number of conflicts such as traffic problems. This is about creating a reliable system that takes over the task of identifying free slots in a parking area and keeping the record of vehicles parked very systematic manner. This project lessens human 
+	effort at the parking area to a great extent such as in case of searching of free slots by the driver and calculating the payment for each vehicle using parking area. The 
+	various steps involved in this operation are vehicle identification using RFID tags, free slot detection using IR sensors and payment calculation is done on the basis of 
+	period of parking and this is done with the help of real time clock.\newpage
+	\item[ 9. ] \textbf{RFID Based Smart vehicle Parking System Using IoT}\\
+
+	V.Kameshwaran,B. Kishore and S. Poorna Chandran have discussed about RFID Based Smart vehicle Parking System Using IoT.
+	Now days
+	the use of vehicles is increasing day by day, the major problem in densely populated areas is lack o
+	f parking availability.  The RFID  technique  is  the  mostly  used  technique  to  overcome  or  eradicate  the  cause.  
+	The  existing  technique  of 
+	RFID concept is to check the balance amount in the vehicled rather than finding the availability of parking lots at remote location. 
+	The major disadvantage in this existing methodology is tracing the amount deducted and it varies fro
+	m time to time on various
+	slots. Hence we provide a solution i.e., by this proposed method we ensure an 
+	efficient monitoring system
+	that allows for tracking 
+	availability of spaces in parking areas in remote areas like malls, parks and other public places as
+	well. This project forecasts all 
+	the  possible  ways  to  reduce  parking tension. This  project aims  at interfacing  RFID  concept  with  Internet  of  Things
+	(IoT).  IoT 
+	establishes a client server communication that enables the user for remote communication regarding availability of parking slots 
+	from distance.\par \hspace{0.5cm} In order to enhance a mobile friendly environment an website is being developed that gives prior information to 
+	the user about the availability of parking slot and thereby enabling them to book the slot for parking from a distance and the slot remains  booked for  a  period of  half  an  hour  there by  waits  for  the  user  to  arrive  until  the  specified time  is  reached. When the 
+	time exceeds, the user needs to book the slot again if available. This ensures minimization of traffic constraints in parking
+	areas. This can be implemented in shopping malls where usually traffic problems arise due to lack or unavailability of parking.
+
+	\item[ 10. ] \textbf{Automated Vehicle Parking System using RFID}
+	
+	S.C.Hanche, Pooja Munot, Pranali Bagal, Kirti Sonawane and Pooja Pise have discussed about Automated Vehicle Parking System using RFID.
+	Radio   Frequency      Identification      (RFID)  
+	technology   is   very   useful   technology   in   automation   of 
+	vehicle   parking   system   in   mall/building.
+	One   of   the 
+	challenging problems for many 
+	vehicle owners in big cities 
+	is where to park their vehicles.
+	If the parking slot is known 
+	in advance one can save precious time and fuel wastage. In 
+	our   proposed   system   the   user   is   informed   about   the 
+	parking  slot  availability  at  a  particular  parking  location.\par \hspace{0.5cm}
+	The  slot  availability  details  are  collected  using  an  RFID 	system and are updated periodically into the database.
+	Entry point and exit point of the parking-lots will be 
+	under  control  with  RFID  readers,  labels  and  barriers.   
+	Personnel    costs   
+	will    be    reduced  considerably  using  this 
+	technology. Entry-point and  exit-point will be  handled in 
+	a  fast  manner  without  having  to  stop  the  vehicles  so  that 
+	traffic  jam    problem    will    be    avoided    during    these 
+	processes.  Drivers  will  not  have  to  stop  at  the  circulation 
+	points  and  parking  tickets  will  be  out  of  usage  during 
+	Entry-point   and   exit-point.   Because   we   have   added 
+	recharge  module  therefore  user  has  to  register  into  the 
+	system and he will get message of balance on his mobile.
+	It will be avoided ticket-jamming problems for  the  ticket  
+	processing    machines    as    well.  Vehicle    owners    will    not  
+	have  to  make  any payments  at   each Entry-point  thus  a  
+	faster traffic flow will be possible. Since there won't be any 
+	waiting    during  Entry-point  and exit-points  the  pollution 
+	problem   will   be   avoided.   Automated   parking   system 
+	certainly  reduce  the  total  cost  of  RFID  parking  system 
+	infrastructure without re-modifying the existed hardware.
+	It  also  gives  functioning  for  video  surveillance  which  will 
+	captures objects which are in front of camera.
+\end{itemize}
+\newpage
+\chapter[SOFTWARE REQ SPECIFICATION]{SOFTWARE REQUIREMENT SPECIFICATION}
+\newpage
+The introduction of the Software Requirements Specification (SRS) gives an overview of the whole SRS with reason, scope, definitions, acronyms, contractions, references and review of the SRS. The point of this record is to accumulate and break down and give an inside and out understanding of the entire Smart Parking System by characterizing the issue explanation in detail. Nevertheless, it additionally focuses on the capabilities required by stakeholders and their needs while defining high-level product feature.
+\section{Components}
+\subsection{RFID Tag and RFID Reader}
+\textbf{RFID Tag}\\
+
+	\begin{figure}[H]
+		\begin{center}
+		\includegraphics[scale=0.4]{Tag}
+		\caption{RFID Tag}
+	\end{center}
+	\end{figure}
+
+RFID tagging is an ID system that uses small radio frequency identification devices for identification and tracking purposes. An RFID tagging system includes the tag itself, a read/write device, and a host system application for data collection, processing, and transmission. An RFID tag (sometimes called an RFID transponder ) consists of a chip , some memory and an antenna .RFID tags that contain their own power source are known as active tags. Those without a power source are known as passive tags. A passive tag is briefly activated by the radio frequency ( RF ) scan of the reader. The electrical current is small -- generally just enough for transmission of an ID number. Active tags have more memory and can be read at greater ranges.
+\newpage
+\textbf{RFID Reader}\\
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.3]{Redaer}
+		\caption{RFID Reader}
+	\end{center}
+\end{figure}
+
+A radio frequency identification reader (RFID reader) is a device used to gather information from an RFID tag, which is used to track individual objects. Radio waves are used to transfer data from the tag to a reader. RFID is a technology similar in theory to bar codes. However, the RFID tag does not have to be scanned directly, nor does it require line-of-sight to a reader. The RFID tag it must be within the range of an RFID reader, which ranges from 3 to 300 feet, in order to be read. RFID technology allows several items to be quickly scanned and enables fast identification of a particular product, even when it is surrounded by several other items.
+RFID tags have not replaced bar codes because of their cost and the need to individually identify every item.\\
+\subsection{Global System for Mobile Communication}
+\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.5]{gsm}
+			\caption{Global System for Communication}
+			\end{center}
+	\end{figure}
+
+\hspace{0.5cm} SIM900 is a Tri-band GSM/GPRS engine that works on frequencies EGSM 900 MHz, DCS 1800 MHz and PCS 1900 MHz. SIM900 features GPRS multi-slot class 10/ class 8 (optional) and supports the GPRS coding schemes CS-1, CS-2, CS-3 and CS-4. You can use AT Command to get information in SIM vehicled. The SIM interface supports the functionality of the GSM Phase 1 specification and also supports the functionality of the new GSM Phase 2+ specification for FAST 64 kbps SIM (intended for use with a SIM application Tool-kit).Both 1.8V and 3.0V SIM vehicleds are supported. The SIM interface is powered from an internal regulator in the module having nominal voltage 2.8V. All pins reset as outputs driving low. \\\\
+\newpage
+\section{Renesas Controller}
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.5]{mcn}
+		\caption{Renesas Controller}
+	\end{center}
+\end{figure}
+The RL78 Family 16-bit micro controllers are the convergence of the high CPU performance of the 78K0R and the superb on-chip
+functions of the R8C and the 78K, and offer a comprehensive lineup
+of 10-128 pin and 1-512 KB products for the 8/16-bit market.
+\subsection{Specifications}
+\begin{enumerate}
+	\item General-purpose register: 8 bits × 32 registers (8 bits × 8 registers × 4 banks)
+	\item ROM: 512 KB, RAM: 32 KB, Data flash memory: 8 KB 
+	\item On-chip high-speed on-chip oscillator 
+	\item On-chip single-power-supply flash memory (with prohibition of block erase/writing function) 
+	\item On-chip debug function 
+	\item Ports  Total 11 ports with 58 Input/Output Pins
+	\item Port 0  0 to 6  Total 7 pins in port 0
+	\item Port 1  0 to 7  Total 8 pins in port 1
+	\item Port 2  0 to 7  Total 8 pins in port 2
+	\item Port 3  0 to 1  Total 2 pins in port 3
+	\item Port 4  0 to 3  Total 4 pins in port 4
+	\item Port 5  0 to 5  Total 6 pins in port 5
+	\item Port 6  0 to 3  Total 4 pins in port 6
+	\item Port 7  0 to 7  Total 8 pins in port 7
+	\item Port 12  0 to 4  Total 5 pins in port 12
+	\item Port 13  0, 7  Total 2 pins in port 13
+	\item Port 14  0, 1, 6, 7  Total 4 pins in port 14
+	\item On-chip power-on-reset (POR) circuit and voltage detector (LVD)  
+	\item On-chip watchdog timer (operable with the dedicated low-speed on-chip oscillator) 
+	\item I/O ports: 16 to 120 (N-ch open drain: 0 to 4) 
+	\item Timer   16-bit timer:  8 to 16 channels, Watchdog timer:  1 channel 
+	\item Different potential interface: Can connect to a 1.8/2.5/3 V device 
+	\item 8/10-bit resolution A/D converter (VDD = EVDD =1.6 to 5.5 V): 6 to 26 channels 
+	\item Power supply voltage: VDD = 1.6 to 5.5 V
+\end{enumerate}
+\section{Software Used}
+\subsection{CubeSuite+}
+Integrated development environment CubeSuite (Cube suite) offers the ultimate in simplicity, usability, and security for the repetitive editing, building and debugging that typifies software development. Easy to install and operate, CubeSuite offers a highly user-friendly development environment featuring significantly shorter build times and graphical debug functions. The rot lineup of expanded functions and user support functions ensures a dependable environment for all users.
+\subsection{Flash Magic}
+Flash Magic is Windows software from the Embedded Systems Academy that allows easy
+access to all the ISP features provided by the devices. These features include:
+\begin{itemize}
+	\item 	• Erasing the Flash memory (individual blocks or the whole device)
+	\item	• Programming the Flash memory
+	\item	• Modifying the Boot Vector and Status Byte
+	\item	• Reading Flash memory
+	\item	• Performing a blank check on a section of Flash memory
+	\item	• Reading the signature bytes
+	\item	• Reading and writing the security bits
+	
+	\item	• Sending commands to place device in Boot loader mode
+\end{itemize}
+\subsection{Eclipse}
+Eclipse is an integrated development environment (IDE) used in computer programming, and is the most widely used Java IDE. It contains a base workspace and an extensible plug-in system for customizing the environment. Eclipse is written mostly in Java and its primary use is for developing Java applications, but it may also be used to develop applications in other programming languages via plug-ins, including Ada, ABAP, C, C++, C\#, COBOL, D, Fortran, Haskell, JavaScript, Julia, Lasso, Lua, NATURAL, Perl, PHP, Prolog, Python, R, Ruby (including Ruby on Rails framework), Rust, Scala, Clojure, Groovy, Scheme, and Erlang.
+\subsubsection{Android Development Tools}
+Android Development Tools (ADT) is a discontinued Google provided plug-in for the Eclipse IDE that is designed to provide an integrated environment in which to build Android applications. ADT extends the abilities of Eclipse to let developers set up new Android projects, create an application UI, add packages based on the Android Framework API, debug their applications using the Android SDK tools, and export signed (or unsigned) .apk files in order to distribute their applications. It is freely available to download. It was the official IDE for Android but was replaced by Android Studio (based on IntelliJ IDEA Community Edition). ADT is officially deprecated since the end of 2015, and now Google is focused on Android Studio as the official Android IDE. The Android Device Monitor that shipped with ADT was built on the Eclipse Platform. This tool still ships with Android Studio.
+
+\chapter{SYSTEM DESIGN}
+\newpage
+\section{Block Diagram}
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.81]{BD}
+		\caption{Block Diagram}
+	\end{center}
+\end{figure}
+
+RFID allows the wireless storage and automatic retrieval of data. It provides a significant
+improvement over not only conventional identification, tracking, and stocking of objects, but over
+the barcode system as well. 
+RFID technology is roughly composed of RFID tag and RFID tag reader. 
+The IC chip in the tag is used for data storage and logical operations, whereas the coiled antenna is
+used for communication between readers. The tag is divided
+into active tag and passive tag according to the supply of electronic power. RFID reader or
+transceiver is a device that sends RF signal to the tag and receives the information from the tag, and
+then sends this information to the back office application. The reader may read data from the tag
+and write data to the tag. In general, reader is composed of a RF module, a control unit and a
+coupling element to interrogate electronic tag via RF communication. The RFID reader device can
+communicate with multiple RFID tags simultaneously via radio frequency waves.
+RFID reader, one of the core components of RFID technology, sends signal around. Active tag send a
+its own identification signal around, whereas passive tag, getting the signal, uses it as power source
+and modulates incoming signal, after which resends it back to reader. Reader, after getting the
+modulated signal, demodulates it and transfers the data it extracts to the application program. After
+this step, it is application program's responsibility to process tag data.
+\section{Data Flow}
+\begin{enumerate}
+	\item A prototype module will be developed for the project. It includes individual PCB boards for all interfaces according to the block diagram. Every PCB will be inter-connected with jumper wires.
+	\item Through android app the peoples are going to book the vehicle, bike, parking.
+	\item RFID tag is used to  park specifically for parking like P1,P2,P3,P4.
+	\item SMS alert goes through GSM module.
+	\item User need to login the android app to reserve parking space 
+	\item Need to select student, visitor or lecturer parking place for student, visitor or lecturers respectively (S1, S2, V, and L).
+	\item Select availability parking place
+	\item Send alert to hardware,
+	\item Every owner will have a unique ID (RFID tag) which is validate by the RFID reader. 
+	\item Notification will be sent after allocating space and android will start
+	counting time.
+	\item Once vehicle is removed from the parking space, notification will be sent to android app using GSM and counting time will be stopped.
+	
+\end{enumerate}
+\newpage
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.81]{CheckInFCNew}
+		\caption{Parking-lot check-in process}
+	\end{center}
+\end{figure}
+The vehicle checks in by punching the RFID tag. If  pre booking information is found in database, then gate is opened and the time is recorded and amount  calculation is started in the system.
+When an RFID labeled vehicle attempts to check-in to a parking-lot, the system
+queries if the vehicle is registered to the database or not. If it is a registered vehicle and it
+has not checked out of an unauthorized RFID enabled parking-lot, the system will allow
+
+Utilizing RFID for Smart Parking Applications 111
+its entrance. Upon the entrance, the vehicles identification information, entrance date and
+time and current parking-lot title are recorded in the VehicleCirculationInfo table of the
+database. The check-in information vehicleries great importance since it will be compared to
+the check-out information of the vehicle. If a vehicle has made an unauthorized check-out
+of a parking-lot, the vehicle will not be able to check-in to any of the RFID enabled
+parking-lots. The only solution for the vehicle to check-in is for the owner to pay the fine
+to the fine office. Upon receiving the approval, the barrier lifts up and initiates the check-in
+process
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.81]{CheckOutFCNew}
+		\caption{Parking-lot check-out process}
+	\end{center}
+\end{figure}
+While checking out, the amount is displayed in the android application. If user has paid successfully then check out gate will open. When a vehicle drives into the exit area of the parking-lot to check-out, its identification information is queried on the database. If the vehicle is registered to the system and it has not made an unauthorized entry to the parking-lot the check-out process is initiated. The vehicle's check-out date and time is taken into consideration. The check-out date and time total are subtracted from check-in date and time total. The calculated time is converted into minutes thus the elapsed time in the parking-lot is determined. Upon the check-out, the check-in information of a vehicle is found and updated with check-out in-formation. The check-out information means check-out date, time, the elapsed parking time, and the total fee. 
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.81]{ASMFC}
+		\caption{Android Send Message Flow Chart}
+	\end{center}
+\end{figure}
+\begin{figure}[H]
+	\begin{center}
+	\includegraphics[scale=0.81]{ASMSD}
+	\caption{Android Send Message Sequence Diagram}
+\end{center}
+\end{figure}
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.81]{ASMFC}
+		\caption{Android Receive Message Flow Chart}
+	\end{center}
+\end{figure}
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.81]{ASMSD}
+		\caption{Android Receive Message Sequence Diagram}
+	\end{center}
+\end{figure}
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.81]{ASMUCD}
+		\caption{User Case Diagram}
+	\end{center}
+\end{figure}
+This diagram illustrates the connectivity between the user and the parking system
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.81]{LoginFC}
+		\caption{Login Flow Chart}
+	\end{center}
+\end{figure}
+In Android App,The user is authenticated with the login credentials. provided ear If mismatch is found, then it is redirected again to login activity of Application
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.81]{LoginSD}
+		\caption{Login Sequence Diagram}
+	\end{center}
+\end{figure}
+3-way handshaking is employed for authenticating the user.
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.81]{LoginUCD}
+		\caption{Login Use Case Diagram}
+	\end{center}
+\end{figure}
+
+The user is required to register through the Android App for first to access the pre booking facility of parking system.
+
+\chapter{IMPLEMENTATION}
+\newpage
+	\begin{figure}[H]
+		\begin{center}
+\includegraphics[scale=0.7]{IMP}
+	\caption{Implementation of Project}
+\end{center}
+\end{figure}
+RFID readers, RFID labels, Android Application, barriers and software are used  for the main components of the project. LDR sensor is used to check the status of the particular slot. Registered User (Driver) is given an android application connected to GSM module which gives information about the empty/occupied slots. From application driver has to book slot. Once he is reached the parking area he has to punch his card. DC motor is used as barricade. If the card is valid, then he can park his vehicle. Once he unparked, the park fare is displayed on the screen of mobile. CubeSuite+ platform is used to code the Renesas Micro controller.
+\section{Android Send SMS}
+\begin{itemize}
+	\item [1.]When user clicks on the green(empty)  coloured slot in the android app, a SMS is sent to the parking system with the following string format :
+	\begin{center}
+		\textbf{SxU1}
+	\end{center}
+Where ‘x’ is the slot position and U1 indicates the that user wishes to book that slot 
+	\item [2.]2.In Android app, after booking the slot, the booked slot color will inturn changes to Red and this restricts other users to book that slot.
+\end{itemize}
+\section{Android Receive SMS}
+\begin{itemize}
+	\item [1.] SMS Received at Android App with parking slot information with string format :  
+	\begin{center}
+		\textbf{Sxxxx@}
+	\end{center}
+		if ‘x’ is 0, then app will update that slot as empty (Green color) 
+	if ‘x’ is 1, then app will update that slot as occupied (Red color) 
+	if ‘x’ is 2, then app will update that slot as Booked by user (Red color)
+	\item [2.]SMS Received at Android App with parking slot information with string format : 
+	\begin{center}
+		\textbf{Ay@}
+	\end{center}
+	y is a Integer which denotes the cost calculated by the system
+	This message is read by the android App and is displayed in the Application.
+\end{itemize}
+\section{LDR Sensors}
+\begin{itemize}
+	\item [1.] There are LDR sensors beneath the parking slots which continuously updates the  slot status in parking system.
+	\item [2.] if vehicle is present in the slot, slot’s flag is turned 1, otherwise flag is 0.
+\end{itemize}
+\section{GSM module message send and receive}
+\begin{itemize}
+	\item [1.] GSM module sends the updated slot information to android App after every 1 minute duration.
+	\item [2.] GSM Module is also responsible for receiving the booked slot information from the App and updating in the system.
+\end{itemize}
+\section{RFID module}
+If the user has pre-book the parking slot, upon reading the RFID tag of the user, it triggers the barricade (connected with DC motor) to open and the user can safely park the vehicle in the parking lot.
+\section{DC Motor Module}
+\begin{itemize}
+	\item [1.] when the RFID Sends the trigger, the DC motor opens the barricade for the vehicle to enter in the parking lot
+	\item [2.] After vehicle has entered the parking lot, the DC motor again closes the barricade. 
+\end{itemize}
+\chapter{TESTING, RESULT AND DISCUSSION}
+\newpage
+%Four vehicles were used for the testing process.  Testing process began right after saving identification information of the vehicles to the system.
+
+%During the testing stage of the parking lot system the following criteria were taken into
+%consideration:
+%A single vehicle's check-in and check-out processes were completed. Identification of
+%the vehicle during check-ins and check-outs was successfully achieved. Then the barrier was automatically activated for the passage of
+%the vehicle in or out of the parking lot.
+%Simultaneous check-in and check-outs were successfully performed. The system could
+%control barriers.
+%One of the vehicles made an unauthorized entry to the parking lot. Upon its check-out
+%stage, the barrier did not open.
+\section{Android App}
+\begin{itemize}
+	\item The App has been tested to send and read the messages from the android system. 
+	\item The App has properly responded to messages when only desired string is received.
+	\item The App sends proper messages to the parking system with the desired string upon booking in the App.
+\end{itemize}
+\section{Parking System}
+\begin{itemize}
+	\item The parking system has been tested to update slot status correctly with the use of LDR sensors.
+	\item The system is able to receive the message from android app using GSM module and update the booked slot information in the system correctly
+	\item The system correctly reads any RFID tag using RFID reader and shows the RFID number in the LCD display
+	\item The system upon reading the RFID tag of pre-book user is able to trigger the DC Motor to open the barricade.
+	\item The system is able to send the amount calculated of parking time to android app using GSM module instantly after the vehicle is removed from the slot.
+\end{itemize}
+
+\section{Result}
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.1]{LoginPage}
+		\caption{Login Page}
+	\end{center}
+\end{figure}
+%\addcontentsline{toc}{section}{\numberline{}Android Application : MainHomePage}
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.1]{MainHomePage}
+		\caption{Main Home Page}
+	\end{center}
+\end{figure}
+%\addcontentsline{toc}{section}{\numberline{}Android Application : Slots}
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.1]{slots}
+		\caption{Parking Slots}
+	\end{center}
+\end{figure}
+\chapter{CONCLUSION AND FUTURE WORK}
+\newpage
+\section{Conclusion}
+The major enablers or drivers for smart parking essentially are the problems of urban livability, transportation mobility and environment sustainability. Primarily Smart Parking technology is about enhancing the productivity levels and the service levels in operations. Some of the underlying benefits could be lowering operating costs, while building value for customer to drive occupancy, revenues and facility value. We have evolved from traditional servicing channels like toll-booth and parking attendants to incorporate automated pay stations, meters and gates. The project is designed using structured modeling and is able to provide the desired results. It can be successfully implemented as a Real Time system with certain modifications.Science is discovering or creating major breakthrough in various fields, and hence technology keeps changing from time to time. Going further, most of the units can be fabricated on a single along with micro controller thus making the system compact thereby making the existing system more effective. To make the system applicable for real time purposes components with greater range needs to be implemented. 
+Check-ins and check-outs will be handled in a fast manner without having to stop the cars so that traffic jam problem will be avoided during these processes.
+
+Different case tests are considered, we found that most of the test cases are working fine with the accuracy rate 98\%.Implementation of the prototype system is developed by establishing simple
+parking place prototype along with four slots, barricade, LDR system, LCD (Liquid
+Crystal Display) display, RFID tag, and reader. We could able to test the system by
+using toy vehicle. The system is working effectively with all the information
+regarding vehicle movement, parking slot utilization, owner convenience and found
+that this system can work effectively if it is field deployed.
+
+ 
+\section{Future Work}
+\begin{itemize}
+	\item[1.] Future scope of this project is both interesting and e
+	nticing, 
+	with    the    development    of    platform    based    applications 
+	,connectivity  of  the  project  components  with  GPS  (global 
+	positioning system) seems an obvious way to take the concept 
+	further   .   employees   would   get   parking   slot   availability 
+	information on their 
+	smart phones will not only be convenient 
+	for them but will also help to reduce on road traffic during rush 
+	hour      
+	\item[2.] Proposed system does not have access to complete parking information. So, the app should gain complete access to parking database from college for better verification of Parking System.
+	\item[3.] Real time payment is not provided in Parking Fare. It can be enabled during further development of project.
+	\item[4.] Proposed system focuses only allocating slot to registered user. Further, proposed system can be extended for all user as well. 
+	\item[5.] Our future work is to create vehicle parking system to work as an operational platform in a smart city.
+	\item[6.] Users can interact with the system by installing the corresponding car parking application on their mobile devices
+
+\end{itemize}
+\clearpage
+\thispagestyle{empty}
+\section*{BIBLIOGRAPHY}
+\addcontentsline{toc}{chapter}{\numberline{}BIBLIOGRAPHY}
+\begin{enumerate}
+	\item Z. Pala, N. Inanc, "Smart parking applications using RFID technology", Proceedings of the 1st Annual RFID Eurasia, pp. 1-3, Sept 2007.
+	\item A. Kotb, Y. Shen, X. Zhu, Y. Huang, "iparker-a new smart car-parking system based on dynamic resource allocation and pricing", IEEE Trans. Intell. Transport. Syst., vol. 17, no. 9, pp. 2637-2647, Sept. 2016.
+	\item A. Kumar, I. P. Singh, S. K. Sud, "Energy efficient and low cost indoor environment monitoring system based on IEEE 1451 standards", IEEE Sensors Journal, vol. 11, no. 10, pp. 2598-2610, Oct. 2011
+	\item C. Lee, M. Wen, C. Han, D. Kou, "An automatic monitoring approach for unsupervised parking lots in outdoors", Proc. 39th Annu. Int. Carnahan Conf. Security Technology, pp. 271-274, 2005
+	\item Arnott, R., Rowse, J., 1999. Modeling parking, Journal of Urban Economics 45, pp. 97–124.
+	\item Bal, E., 2007., An Rfid Application For The Disabled:Path Finder,1st RFID Eurasia Conference, 5-6
+	September 2007, Istanbul,Turkey.
+	\item Banks, J., Pachano, M., Thompson, T., Hanny, D., 2007. RFID Applied. 299. John Wiley \& Sons, inc.
+	\item Budak, E., Çatay, B., Tekin, İ., Yenigün, H., Abbak, M., 2007. Design of an RFID-based manufacturing,
+	monitoring and analysis system,1st RFID Eurasia Conference, 5-6 September 2007, Istanbul,Turkey.
+	\item Brewer, A., Landers, T., Radio frequency identification:a survey and asseement of the technology,
+	University of Arkansas, Department of Industrial Engineering Technical Report, 1997.
+	\item Brown, M., Patadia, S., Dua, S., 2007. Comptia RFID+ certification. McGraw-Hill,2007.
+	\item Chandramouli, R., Grance, T., Kuhn, R., Landau, S., 2005.Security Standarts For The RFID Market,
+	IEEE Privacy And Security, November- December 2005, pp. 85-89.
+	\item Chen, J., W., 2005, A Ubiquitous Information Technology Framework Using RFID to Support Students'
+	Learning,icalt, pp. 95-97, Fifth IEEE International Conference on Advanced Learning Technologies(ICALT'05), 2005
+	\item Curty, J., Declercq, M., Dehollain, C., Joehl, N., 2007. Design and optimization of passive uhf rfid systems..
+	\item Anonymous, 2005. Electronic tolling technology \& implementation. Richmond, Virginia.
+	\item Arnott, R., Rowse, J., 1999. Modeling parking, Journal of Urban Economics 45, pp. 97–124.
+\end{enumerate}
+\newpage
+%==================Back Matter=====================
+\pagenumbering{alph}
+\section*{APPENDIX}
+\addcontentsline{toc}{chapter}{\numberline{}APPENDIX}
+%\addcontentsline{toc}{section}{\numberline{}Project Image}
+
+	\begin{figure}[H]
+		\begin{center}
+		\includegraphics[scale=0.5]{park}
+		\caption{Project Image}
+	\end{center}
+	\end{figure}
+
+
+\end{document}
