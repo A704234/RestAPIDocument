@@ -1,0 +1,5 @@
+com/atos/equens/worldline/SimpleSpringRestAPI/service/EmployeeService.class
+com/atos/equens/worldline/SimpleSpringRestAPI/DAO/EmployeeDAO.class
+com/atos/equens/worldline/SimpleSpringRestAPI/SimpleSpringRestApiApplication.class
+com/atos/equens/worldline/SimpleSpringRestAPI/model/Employee.class
+com/atos/equens/worldline/SimpleSpringRestAPI/controller/EmployeeController.class
